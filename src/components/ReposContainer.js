@@ -3,14 +3,22 @@ import { fetchRepos } from './services/repos-api'
 import axios from 'axios';
 
 export default function ReposContainer (){
-    const [repos, setRepos] = useState({
-        repos: []
-    });
+    const [repos,setRepos] = useState({});
 
-    fetchRepos('gutovesco').then(res => {
-        console.log(res.data)
-    })
+    useEffect(() => {
+        fetchRepos('gutovesco').then(res => {
+            setRepos({repos: res.data})
+            console.log(res.data)
+        })
+    }, [])
+
     return (
-        <p>aqui</p>
+        <>
+        <ul>
+            {() => repos.map(repo => (
+                 <li key={repo.id}>{repo.name}</li>
+            ) )}
+        </ul>
+        </>
     )
 }
