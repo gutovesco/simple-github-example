@@ -4,15 +4,8 @@ import { fetchRepos } from './services/repos-api'
 export default function ReposContainer (){
     const [repos,setRepos] = useState({
         repos: [],
-        username: ''
+        username: '',
     });
-
-    useEffect(() => {
-        fetchRepos('gutovesco').then(res => {
-            setRepos({repos: res.data})
-            console.log(res.data)
-        })
-    }, [])
 
     const handleChange = (e) => {
         let username = e.target.value;
@@ -21,11 +14,17 @@ export default function ReposContainer (){
           return { ...prevState, username: username }
         });
       }
+      const submitHandler = (e) => {
+          e.preventDefault();  
+          fetchRepos(repos.username).then(res => {
+          setRepos({repos: res.data})
+          })
+      }
 
     return (
         <>
         <h1>Repos</h1>
-        <form action="#">
+        <form action="#" onSubmit={submitHandler}>
             <input 
             onChange={handleChange}
             placeholder="Informe o nome de usuario no github" 
