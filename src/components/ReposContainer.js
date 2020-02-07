@@ -23,20 +23,23 @@ export default function ReposContainer (){
 
     return (
         <>
-        <h1>Repos</h1>
-        <form action="#" onSubmit={submitHandler}>
+        <h1 className="header">Repositórios</h1>
+        <main>
+        <form action="#" onSubmit={submitHandler}>   
             <input 
             onChange={handleChange}
             placeholder="Informe o nome de usuario no github" 
-            type="search"
-            style={{width: '250px'}}
+            type="search" 
+            className="input-username"
             ></input>
+            
         </form>
-        <ul>
+        <ul className="results">
             {repos.repos.map(repo => (
                  <li key={repo.id}>{repo.name}</li>
             ) )}
         </ul>
+        </main>
     )
 }
         </>
